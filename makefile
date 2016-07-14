@@ -25,16 +25,16 @@ common:
 	$(MKDIR) bin
 
 7za: common
-	$(MAKE) -C CPP/7zip/Bundles/Alone all
-	$(MAKE) -C check/my_86_filter  all
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Alone all
+	$(MAKE) -j4 -C check/my_86_filter  all
 
 7zr: common
-	$(MAKE) -C CPP/7zip/Bundles/Alone7z  all
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Alone7z  all
 
 Client7z: common
 	$(MKDIR) bin/Codecs
-	$(MAKE) -C CPP/7zip/Bundles/Format7zFree all
-	$(MAKE) -C CPP/7zip/UI/Client7z          all
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Format7zFree all
+	$(MAKE) -j4 -C CPP/7zip/UI/Client7z          all
 
 app: common 7zFM 7zG 7z sfx
 	rm -fr               p7zip.app
@@ -50,20 +50,20 @@ app: common 7zFM 7zG 7z sfx
 	cp -rp GUI/help   p7zip.app/Contents/MacOS/
 
 depend:
-	$(MAKE) -C CPP/7zip/Bundles/Alone         depend
-	$(MAKE) -C CPP/7zip/Bundles/Alone7z       depend
-	$(MAKE) -C CPP/7zip/Bundles/SFXCon        depend
-	$(MAKE) -C CPP/7zip/UI/Client7z           depend
-	$(MAKE) -C CPP/7zip/UI/Console            depend
-	$(MAKE) -C CPP/7zip/Bundles/Format7zFree  depend
-	$(MAKE) -C CPP/7zip/Compress/Rar          depend
-	$(MAKE) -C CPP/7zip/UI/GUI                depend
-	$(MAKE) -C CPP/7zip/UI/FileManager        depend
-	$(MAKE) -C check/my_86_filter             depend
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Alone         depend
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Alone7z       depend
+	$(MAKE) -j4 -C CPP/7zip/Bundles/SFXCon        depend
+	$(MAKE) -j4 -C CPP/7zip/UI/Client7z           depend
+	$(MAKE) -j4 -C CPP/7zip/UI/Console            depend
+	$(MAKE) -j4 -C CPP/7zip/Bundles/Format7zFree  depend
+	$(MAKE) -j4 -C CPP/7zip/Compress/Rar          depend
+	$(MAKE) -j4 -C CPP/7zip/UI/GUI                depend
+	$(MAKE) -j4 -C CPP/7zip/UI/FileManager        depend
+	$(MAKE) -j4 -C check/my_86_filter             depend
 
 sfx: common
 	$(MKDIR) bin
-	$(MAKE) -C CPP/7zip/Bundles/SFXCon  all
+	$(MAKE) -j4 -C CPP/7zip/Bundles/SFXCon  all
 
 common7z:common
 	$(MKDIR) bin/Codecs
@@ -71,17 +71,17 @@ common7z:common
 	$(MAKE) -C CPP/7zip/Compress/Rar         all
 
 7z: common7z
-	$(MAKE) -C CPP/7zip/UI/Console           all
+	$(MAKE) -j4 -C CPP/7zip/UI/Console           all
 
 7zG: common7z
 	cd bin ; rm -f Lang ; ln -s ../GUI/Lang .
 	cd bin ; rm -f help ; ln -s ../GUI/help .
-	$(MAKE) -C CPP/7zip/UI/GUI               all
+	$(MAKE) -j2 -C CPP/7zip/UI/GUI               all
 
 7zFM: common7z
 	cd bin ; rm -f Lang ; ln -s ../GUI/Lang .
 	cd bin ; rm -f help ; ln -s ../GUI/help .
-	$(MAKE) -C CPP/7zip/UI/FileManager       all
+	$(MAKE) -j2 -C CPP/7zip/UI/FileManager       all
 
 clean:
 	$(MAKE) -C CPP/myWindows                 clean

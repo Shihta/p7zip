@@ -10,6 +10,7 @@
 const int kPaddingSize = 2;
 const int kPercentsSize = 4;
 const int kMaxExtraSize = kPaddingSize + 32 + kPercentsSize;
+static int printcount = 0;
 
 static void ClearPrev(char *p, int num)
 {
@@ -50,6 +51,11 @@ void CPercentPrinter::PrintNewLine()
 
 void CPercentPrinter::RePrintRatio()
 {
+  if ((++printcount & 511) == 0) {
+    (*OutStream) << "\n[[" << m_CurValue << "," << m_Total << "]]\n";
+    OutStream->Flush();
+    printcount = 0;
+  }
   char s[32];
   ConvertUInt64ToString(((m_Total == 0) ? 0 : (m_CurValue * 100 / m_Total)), s);
   int size = (int)strlen(s);
@@ -76,8 +82,8 @@ void CPercentPrinter::RePrintRatio()
   for (; size < m_NumExtraChars; size++)
     *p++ = ' ';
   MyStringCopy(p, s);
-  (*OutStream) << fullString;
-  OutStream->Flush();
+  //(*OutStream) << fullString;
+  //OutStream->Flush();
   m_PrevValue = m_CurValue;
 }
 

@@ -1,3 +1,9 @@
+p7zip (9.20.1~dfsg.1-4+deb7u3.st.0.1) trusty-security; urgency=medium
+
+  * Force to print progress
+
+ -- Shihta (@Nantou) <kuster.die9841+lp@gmail.com>  Thu, 14 Jul 2016 10:20:55 +0800
+
 p7zip (9.20.1~dfsg.1-4+deb7u2build0.14.04.1) trusty-security; urgency=medium
 
   * fake sync from Debian

@@ -519,7 +519,8 @@ int Main2(
     #endif
 
     CUpdateCallbackConsole callback;
-    callback.EnablePercents = options.EnablePercents;
+    //callback.EnablePercents = options.EnablePercents;
+    callback.EnablePercents = true;
 
     #ifndef _NO_CRYPTO
     callback.PasswordIsDefined = passwordIsDefined;
