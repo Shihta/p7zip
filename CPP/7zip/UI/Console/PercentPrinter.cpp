@@ -51,7 +51,7 @@ void CPercentPrinter::PrintNewLine()
 
 void CPercentPrinter::RePrintRatio()
 {
-  if ((++printcount & 511) == 0) {
+  if (++printcount >= 500) {
     (*OutStream) << "\n[[" << m_CurValue << "," << m_Total << "]]\n";
     OutStream->Flush();
     printcount = 0;
